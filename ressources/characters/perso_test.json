@@ -1,0 +1,34 @@
+{
+  "admin" : {
+    "joueur" : "",
+    "channel" : ""
+  },
+  "nom": "",
+  "prenom": "",
+  "stats" : {
+    "esquive": 0,
+    "precision": 0,
+    "locomotion": 0,
+    "solidité": 0,
+    "equilibre": 0,
+    "furtivité": 0,
+    "initiative": 0,
+    "chance": 0,
+    "insanite": 0,
+    "perception": 0,
+    "réflexion": 0,
+    "ingénierie": 0,
+    "sournoiserie": 0,
+    "charme": 0,
+    "adresse": 0
+  },
+  "competence" : [{
+    "title" : "",
+    "lvl" :  0
+  }],
+  "savoir" : [{
+    "title" : "",
+    "lvl" : ""
+  }],
+  "left_to_attribute" : 0
+}
