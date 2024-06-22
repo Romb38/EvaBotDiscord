@@ -60,7 +60,7 @@ async def d6(ctx):
 
 
 @bot.command(name='d4')
-async def d6(ctx):
+async def d4(ctx):
     rand_num = random.randint(1, 4)
     await ctx.send(f'{rand_num}')
 
@@ -112,6 +112,7 @@ async def plist(ctx):
 
 @bot.command(name="disconnect")
 async def disconnect(ctx):
+    t.create_or_update_linker_file()
     pseudo = ctx.author.name
     out = t.disconnect_from_linker(LINKER, pseudo)
     if out:
