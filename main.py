@@ -32,6 +32,10 @@ async def on_ready():
     print(f'Bot connecté en tant que {bot.user.name}')
 
 
+@bot.command(name="help")
+async def help(ctx):
+    await ctx.send(HELP_LINK)
+
 @bot.command(name='ping')
 @bot.check(has_role('MJ'))
 async def ping(ctx):
