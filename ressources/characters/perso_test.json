@@ -3,8 +3,8 @@
     "joueur" : "",
     "channel" : ""
   },
-  "nom": "",
-  "prenom": "",
+  "nom": "Jean",
+  "prenom": "Patrice",
   "stats" : {
     "esquive": 0,
     "precision": 0,
