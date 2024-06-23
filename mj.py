@@ -133,7 +133,6 @@ class MJ(commands.Cog):
 
     @commands.command(name="init", help="Initialise les rôles et salons pour les personnages.")
     @commands.has_permissions(administrator=True)
-    @has_role("MJ")
     async def init(self, ctx):
         guild = ctx.guild
         t.create_or_update_linker_file()
@@ -146,18 +145,18 @@ class MJ(commands.Cog):
         linker_data = [line.strip().split(':') for line in lines]
         slugs = [data[0].strip() for data in linker_data]
 
+        # Créer le rôle MJ s'il n'existe pas déjà
+        mj_role = discord.utils.get(guild.roles, name="MJ")
+        if not mj_role:
+            mj_role = await guild.create_role(name="MJ", color=discord.Color.yellow(), hoist=True)
+            await ctx.send("Rôle 'MJ' créé.")
+
         # Créer les rôles pour chaque slug
         for slug in slugs:
             role = discord.utils.get(guild.roles, name=slug)
             if not role:
                 role = await guild.create_role(name=slug, hoist=True)
                 await ctx.send(f"Rôle '{slug}' créé.")
-
-        # Créer le rôle MJ s'il n'existe pas déjà
-        mj_role = discord.utils.get(guild.roles, name="MJ")
-        if not mj_role:
-            mj_role = await guild.create_role(name="MJ", color=discord.Color.yellow(), hoist=True)
-            await ctx.send("Rôle 'MJ' créé.")
 
         # Créer la catégorie 'personnage'
         category = discord.utils.get(guild.categories, name="personnage")
@@ -201,7 +200,6 @@ class MJ(commands.Cog):
 
     @commands.command(name="ending", help="Nettoie les rôles et salons créés par la commande init.")
     @commands.has_permissions(administrator=True)
-    @has_role("MJ")
     async def ending(self, ctx):
         guild = ctx.guild
 
