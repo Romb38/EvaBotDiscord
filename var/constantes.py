@@ -4,14 +4,12 @@ from dotenv import load_dotenv
 import os
 import platform
 
-# Vérifiez si le système d'exploitation est Windows
-if platform.system() == 'Windows':
-    encoding = 'utf-16'
-else:
-    encoding = 'utf-8'
+# Chargez les variables d'environnement avec l'encodage appropriée
+try :
+    load_dotenv(encoding="utf-8")
+except Exception as e:
+    load_dotenv(encoding="utf-16")
 
-# Chargez les variables d'environnement avec l'encodage approprié
-load_dotenv(encoding=encoding)
 
 TOKEN = os.getenv('TOKEN')
 LINKER = "./ressources/linker.txt"
