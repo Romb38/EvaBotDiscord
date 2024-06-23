@@ -30,20 +30,15 @@ class Incarnation(commands.Cog):
         await ctx.send(f'{rand_num}')
 
     @commands.command(name='d', help='Renvoie un nombre aléatoire entre 1 et le nombre spécifié')
-    async def random_number(self, ctx, number: int):
+    async def random_number(self, ctx, number: int = commands.parameter(description=": Valeur maximale du dé (incluse)")):
         if number < 1:
             await ctx.send('Veuillez entrer un nombre supérieur à 0.')
         else:
             rand_num = random.randint(1, number)
             await ctx.send(f'{rand_num}')
 
-    # @random_number.error
-    # async def random_number_error(self, ctx, error):
-    #     if isinstance(error, commands.MissingRequiredArgument):
-    #         await ctx.send('Veuillez entrer un nombre.')
-
     @commands.command(name='connect', help='Lie un joueur à une incarnation en utilisant un slug.')
-    async def connect(self, ctx, slug: str):
+    async def connect(self, ctx, slug: str = commands.parameter(description=": Slug de l'incarnation (généralement nom_prenom)")):
         player_pseudo = ctx.author.name  # Obtenir le pseudo du joueur
         t.create_or_update_linker_file()
         result = t.update_linker_file(slug, player_pseudo)
@@ -77,7 +72,7 @@ class Incarnation(commands.Cog):
             await ctx.send("Déconnecté(e) avec succès !")
 
     @commands.command(name="add", help="Ajoute une valeur aux statistiques")
-    async def add(self, ctx, count:int, stats:str):
+    async def add(self, ctx, count:int= commands.parameter(description=": Valeur de l'augmentation"), stats:str= commands.parameter(description=": Nom de la stat à améliorer")):
         file = t.get_file_for_player(ctx.author.name)
         if not file:
             await ctx.send("Vous n'êtes pas connecté à une incarnation, connectez-vous avec !connect <slug>")

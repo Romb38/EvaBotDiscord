@@ -28,11 +28,14 @@ class MJ(commands.Cog):
     @commands.command(name='ping', help="Vérifier si le bot fonctionne")
     @has_role('MJ')
     async def ping(self, ctx):
+        """
+        Vérifier si le bot fonctionne.
+        """
         await ctx.send('Pong!')
 
     @commands.command(name='lvlup', help="Ajoute un level à quelqu'un")
     @has_role("MJ")
-    async def lvlup(self, ctx, player: discord.Member):
+    async def lvlup(self, ctx, player: discord.Member = commands.parameter(description=": Mention du joueur lié à l'incarnation qui à level-up")):
         file = t.get_file_for_player(player.name)
         if not file:
             await ctx.send(f"{player.name} n'est pas lié à une incarnation")
@@ -42,9 +45,12 @@ class MJ(commands.Cog):
         await ctx.send(f"{player} à level up !")
 
 
-    @commands.command(name='lvlup_all')
+    @commands.command(name='lvlup_all', help="Ajoute un level à toutes les incarnations")
     @has_role("MJ")
     async def lvlup_all(self, ctx):
+        """
+        Ajoute un level à toutes les incarnations
+        """
         pseudos = t.get_connected_players()
         for p in pseudos:
             member = discord.utils.get(ctx.guild.members, name=p)
@@ -52,7 +58,7 @@ class MJ(commands.Cog):
 
     @commands.command(name="fdisconnect", help="Dé-lie de force un personnage et son incarnation")
     @has_role("MJ")
-    async def fdisconnect(self, ctx, player: discord.Member):
+    async def fdisconnect(self, ctx, player: discord.Member = commands.parameter(description=": Mention du joueur à dé-lier de son incarnation")):
         out = t.disconnect_from_linker(player.name)
         if out:
             await ctx.send(f"{player.name} n'était pas lié(e) à une incarnation")
@@ -61,7 +67,7 @@ class MJ(commands.Cog):
 
     @commands.command(name="add_insanite", help="Ajoute de l'insanité à un personnage")
     @has_role("MJ")
-    async def add_insanite(self, ctx, player: discord.Member):
+    async def add_insanite(self, ctx, player: discord.Member = commands.parameter(description=": Mention du joueur dont l'incarnation va gagner de l'insanité")):
         file = t.get_file_for_player(player.name)
         if not file:
             await ctx.send(f"{player.name} n'est pas lié à une incarnation")
@@ -70,9 +76,9 @@ class MJ(commands.Cog):
         await fs.update_character_stats_message(ctx.bot, file)
         await ctx.send(f"{player.name} à reçu 1 point d'insanité")
 
-    @commands.command(name="remove_insanite", help="Ajoute de l'insanité à un personnage")
+    @commands.command(name="remove_insanite", help="Retire de l'insanité à un personnage")
     @has_role("MJ")
-    async def remove_insanite(self, ctx, player: discord.Member):
+    async def remove_insanite(self, ctx, player: discord.Member= commands.parameter(description=": Mention du joueur dont l'incarnation va perdre de l'insanité")):
         file = t.get_file_for_player(player.name)
         if not file:
             await ctx.send(f"{player.name} n'est pas lié à une incarnation")
@@ -100,7 +106,7 @@ class MJ(commands.Cog):
 
     @commands.command(name="add_competence", help="Ajoute un niveau à une compétence de quelqu'un")
     @has_role("MJ")
-    async def add_competence(self,ctx,player: discord.Member, competence_name:str):
+    async def add_competence(self,ctx,player: discord.Member = commands.parameter(description=": Mention du joueur dont l'incarnation va gagner un niveau de compétence") , competence_name:str = commands.parameter(description=": Nom de la compétence")):
         file = t.get_file_for_player(player.name)
         if not file:
             await ctx.send(f"{player.name} n'est pas lié à une incarnation")
@@ -111,7 +117,7 @@ class MJ(commands.Cog):
 
     @commands.command(name="add_savoir", help="Ajoute un niveau à une compétence de quelqu'un")
     @has_role("MJ")
-    async def add_competence(self,ctx,player: discord.Member, competence_name:str):
+    async def add_competence(self,ctx,player: discord.Member = commands.parameter(description=": Mention du joueur dont l'incarnation va gagner un niveau de compétence"), competence_name:str= commands.parameter(description=": Intitulé du savoir")):
         file = t.get_file_for_player(player.name)
         if not file:
             await ctx.send(f"{player.name} n'est pas lié à une incarnation")
@@ -171,8 +177,8 @@ class MJ(commands.Cog):
             if not channel:
                 overwrites = {
                     guild.default_role: discord.PermissionOverwrite(read_messages=False),
-                    role: discord.PermissionOverwrite(read_messages=True),
-                    mj_role: discord.PermissionOverwrite(read_messages=True)
+                    role: discord.PermissionOverwrite(read_messages=True, send_messages=False),
+                    mj_role: discord.PermissionOverwrite(read_messages=True,send_messages=True)
                 }
                 new_channel = await guild.create_text_channel(slug, category=category, overwrites=overwrites)
                 await ctx.send(f"Salon '{slug}' créé pour le rôle '{slug}'.")
