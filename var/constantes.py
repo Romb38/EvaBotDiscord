@@ -2,9 +2,17 @@ import asyncio
 
 from dotenv import load_dotenv
 import os
+import platform
 
-# Charger les variables d'environnement à partir du fichier .env
-load_dotenv(encoding="utf-8")
+# Vérifiez si le système d'exploitation est Windows
+if platform.system() == 'Windows':
+    encoding = 'utf-16'
+else:
+    encoding = 'utf-8'
+
+# Chargez les variables d'environnement avec l'encodage approprié
+load_dotenv(encoding=encoding)
+
 TOKEN = os.getenv('TOKEN')
 LINKER = "./ressources/linker.txt"
 PERSO = "./ressources/characters/"
