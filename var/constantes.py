@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 # Charger les variables d'environnement à partir du fichier .env
-load_dotenv()
+load_dotenv(encoding="utf-8")
 TOKEN = os.getenv('TOKEN')
 LINKER = "./ressources/linker.txt"
 PERSO = "./ressources/characters/"

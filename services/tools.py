@@ -1,5 +1,3 @@
-import json
-
 import discord
 
 from var.constantes import *

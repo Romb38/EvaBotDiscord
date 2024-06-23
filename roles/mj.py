@@ -1,5 +1,3 @@
-import json
-
 import discord
 from discord.ext import commands
 
@@ -7,43 +5,29 @@ from errors.ErrorNotConnected import ErrorNotConnected
 from services import tools as t, update_stats as us, format_stats as fs
 from var.constantes import *
 
+def checkup():
+    async def predicate(ctx):
+        if not os.path.exists(LINKER):
+            raise commands.CheckFailure(f"Le fichier {LINKER} n'existe pas.")
+        return True
+
+    return commands.check(predicate)
+
+def has_role(role_name):
+    async def predicate(ctx):
+        role = discord.utils.get(ctx.author.roles, name=role_name)
+        if role is None:
+            raise commands.CheckFailure(f"User does not have the {role_name} role")
+        ctx.command.role_name = role_name
+        return True
+
+    return commands.check(predicate)
 
 class MJ(commands.Cog):
     """Catégorie de commandes pour les MJ."""
 
     def __init__(self, bot):
         self.bot = bot
-
-    @staticmethod
-    def checkup():
-        async def predicate(ctx):
-            if not os.path.exists(LINKER):
-                raise commands.CheckFailure(f"Le fichier {LINKER} n'existe pas.")
-            return True
-
-        return commands.check(predicate)
-
-    @staticmethod
-    def notCheckup():
-        async def predicate(ctx):
-            if os.path.exists(LINKER):
-                raise commands.CheckFailure(f"Le fichier {LINKER} existe.")
-            return True
-
-        return commands.check(predicate)
-
-    @staticmethod
-    def has_role(role_name):
-        async def predicate(ctx):
-            role = discord.utils.get(ctx.author.roles, name=role_name)
-            if role is None:
-                raise commands.CheckFailure(f"User does not have the {role_name} role")
-            ctx.command.role_name = role_name
-            return True
-
-        return commands.check(predicate)
-
-
     @commands.command(name='ping', help="Vérifier si le bot fonctionne")
     @has_role('MJ')
     async def ping(self, ctx):

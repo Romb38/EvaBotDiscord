@@ -6,42 +6,38 @@ from errors.ErrorNotConnected import ErrorNotConnected
 from services import tools as t, update_stats as us, format_stats as fs, roles as r
 from var.constantes import *
 
+def checkup():
+    async def predicate(ctx):
+        if not os.path.exists(LINKER):
+            raise commands.CheckFailure(f"Le fichier {LINKER} n'existe pas.")
+        return True
+
+    return commands.check(predicate)
+
+def isNotConnected():
+    async def predicate(ctx):
+        file = t.get_file_for_player(ctx.author.name)
+        if file:
+            return False
+        return True
+
+    return commands.check(predicate)
+
+def isConnected():
+    async def predicate(ctx):
+        file = t.get_file_for_player(ctx.author.name)
+        if not file:
+            return False
+        return True
+
+    return commands.check(predicate)
+
 
 class Incarnation(commands.Cog):
     """Catégorie de commandes pour les incarnations."""
 
     def __init__(self, bot):
         self.bot = bot
-
-    @staticmethod
-    def checkup():
-        async def predicate(ctx):
-            if not os.path.exists(LINKER):
-                raise commands.CheckFailure(f"Le fichier {LINKER} n'existe pas.")
-            return True
-
-        return commands.check(predicate)
-    @staticmethod
-    def isNotConnected():
-        async def predicate(ctx):
-            file = t.get_file_for_player(ctx.author.name)
-            if file:
-                return False
-            return True
-
-        return commands.check(predicate)
-
-    @staticmethod
-    def isConnected():
-        async def predicate(ctx):
-            file = t.get_file_for_player(ctx.author.name)
-            if not file:
-                return False
-            return True
-
-        return commands.check(predicate)
-
-
 
     @commands.command(name='d20', help="Lance un dé à 20 faces")
     async def d20(self, ctx):

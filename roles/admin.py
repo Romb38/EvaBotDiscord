@@ -8,21 +8,20 @@ from services import tools as t
 from var.constantes import *
 
 
+def checkup():
+    async def predicate(ctx):
+        if not os.path.exists(LINKER):
+            raise commands.CheckFailure(f"Le fichier {LINKER} n'existe pas.")
+        return True
+
+    return commands.check(predicate)
+
+
 class Admin(commands.Cog):
     """Catégorie de commandes pour les MJ."""
 
     def __init__(self, bot):
         self.bot = bot
-
-
-    @staticmethod
-    def checkup():
-        async def predicate(ctx):
-            if not os.path.exists(LINKER):
-                raise commands.CheckFailure(f"Le fichier {LINKER} n'existe pas.")
-            return True
-
-        return commands.check(predicate)
 
     @commands.command(name="set_mj", help="Selectionne un MJ")
     @commands.has_permissions(administrator=True)
