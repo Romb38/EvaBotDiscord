@@ -130,8 +130,9 @@ class Incarnation(commands.Cog):
                 await ctx.send("\u274C - Vous ne pouvez pas ajouter ce nombre à vos stats. Rien n'a été fait")
                 return
             else:
-                out = us.add_stats(file, stats, count)
-                await fs.update_character_stats_message(ctx.bot, file)
+                out,code = us.add_stats(file, stats, count)
+                if not code :
+                    await fs.update_character_stats_message(ctx.bot, file)
                 await ctx.send(out)
 
 

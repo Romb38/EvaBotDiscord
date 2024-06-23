@@ -1,14 +1,14 @@
 {
     "admin": {
-        "channel": "",
-        "last-msg": ""
+        "channel": 1254441236627193886,
+        "last-msg": 1254443978766684242
     },
     "nom": "Jean",
     "prenom": "Patrice",
     "level": 2,
     "stats": {
         "combat": {
-            "esquive": 4,
+            "esquive": 3,
             "precision": 0,
             "locomotion": 0,
             "solidite": 0,

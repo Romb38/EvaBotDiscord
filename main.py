@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix='!', intents=intents, help_command=PrettyHelp(
 
 
 async def load_extensions():
-    initial_extensions = ['roles.mj', 'roles.incarnation']
+    initial_extensions = ['roles.mj', 'roles.incarnation','roles.admin']
     for extension in initial_extensions:
         await bot.load_extension(extension)
 

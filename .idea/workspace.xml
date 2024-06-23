@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88df635f-5ba9-4ef9-8ce9-4c54e00e9b10" name="Changes" comment="Réglage des permission et de l'aide">
+    <list default="true" id="88df635f-5ba9-4ef9-8ce9-4c54e00e9b10" name="Changes" comment="Correctif add stats">
+      <change afterPath="$PROJECT_DIR$/roles/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ressources/characters/perso_test.json" beforeDir="false" afterPath="$PROJECT_DIR$/ressources/characters/perso_test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/roles/Administrator.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/roles/incarnation.py" beforeDir="false" afterPath="$PROJECT_DIR$/roles/incarnation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/roles/mj.py" beforeDir="false" afterPath="$PROJECT_DIR$/roles/mj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/update_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/update_stats.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -197,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719150138751</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Correctif add stats">
+      <option name="closed" value="true" />
+      <created>1719151574232</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1719151574232</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +225,8 @@
     <MESSAGE value="Ajout du requirements + help pour les commandes" />
     <MESSAGE value="Réglage du multi-threading" />
     <MESSAGE value="Réglage des permission et de l'aide" />
-    <option name="LAST_COMMIT_MESSAGE" value="Réglage des permission et de l'aide" />
+    <MESSAGE value="Correctif add stats" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correctif add stats" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/EvaBotDiscord$main.coverage" NAME="main Coverage Results" MODIFIED="1719003049052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
