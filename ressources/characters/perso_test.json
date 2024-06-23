@@ -1,34 +1,44 @@
 {
-  "admin" : {
-    "joueur" : "",
-    "channel" : ""
-  },
-  "nom": "Jean",
-  "prenom": "Patrice",
-  "stats" : {
-    "esquive": 0,
-    "precision": 0,
-    "locomotion": 0,
-    "solidité": 0,
-    "equilibre": 0,
-    "furtivité": 0,
-    "initiative": 0,
-    "chance": 0,
-    "insanite": 0,
-    "perception": 0,
-    "réflexion": 0,
-    "ingénierie": 0,
-    "sournoiserie": 0,
-    "charme": 0,
-    "adresse": 0
-  },
-  "competence" : [{
-    "title" : "",
-    "lvl" :  0
-  }],
-  "savoir" : [{
-    "title" : "",
-    "lvl" : ""
-  }],
-  "left_to_attribute" : 0
+    "admin": {
+        "channel": "",
+        "last-msg": ""
+    },
+    "nom": "Jean",
+    "prenom": "Patrice",
+    "level": 1,
+    "stats": {
+        "combat": {
+            "esquive": 1,
+            "precision": 0,
+            "locomotion": 0,
+            "solidite": 0,
+            "equilibre": 1,
+            "furtivite": 0
+        },
+        "hors_combat": {
+            "perception": 0,
+            "reflexion": 0,
+            "ingenierie": 0,
+            "sournoiserie": 0,
+            "charme": 0,
+            "adresse": 0
+        },
+        "insanite": 3,
+        "initiative": 0,
+        "chance": 0
+    },
+    "competence": [
+        {
+            "title": "",
+            "lvl": 0
+        }
+    ],
+    "savoir": [
+        {
+            "title": "",
+            "lvl": 0
+        }
+    ],
+    "combat_left_to_attribute": 3,
+    "hors_left_to_attribute": 5
 }

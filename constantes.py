@@ -6,4 +6,6 @@ load_dotenv()
 TOKEN = os.getenv('TOKEN')
 LINKER = "./ressources/linker.txt"
 PERSO = "./ressources/characters/"
-HELP_LINK = "https://github.com/Romb38/EvaBotDiscord"
+
+LVL_UP_COMBAT_STAT=1
+LVL_UP_HORS_COMBAT_STAT=2

@@ -1,8 +1,8 @@
-import os
 import json
+from constantes import *
 
 
-def update_linker_file(directory, linker_file, slug, player_pseudo):
+def update_linker_file(slug, player_pseudo, directory=PERSO, linker_file=LINKER, ):
     # Lire le contenu actuel de linker.txt s'il existe
     if os.path.exists(linker_file):
         with open(linker_file, 'r') as f:
@@ -40,7 +40,7 @@ def update_linker_file(directory, linker_file, slug, player_pseudo):
     return "success"
 
 
-def create_or_update_linker_file(directory, linker_file):
+def create_or_update_linker_file(directory=PERSO, linker_file=LINKER):
     # Get list of files in the directory
     files_in_directory = os.listdir(directory)
     # Remove extensions from files
@@ -66,7 +66,7 @@ def create_or_update_linker_file(directory, linker_file):
             file.write(entry + '\n')
 
 
-def list_linker_file(directory='.', linker_file='linker.txt'):
+def list_linker_file(directory=PERSO, linker_file=LINKER):
     if not os.path.exists(linker_file):
         print(f"Le fichier {linker_file} n'existe pas.")
         return ""
@@ -103,7 +103,7 @@ def list_linker_file(directory='.', linker_file='linker.txt'):
     return result_string
 
 
-def disconnect_from_linker(linker_file, pseudo):
+def disconnect_from_linker(pseudo, linker_file=LINKER):
     if not os.path.exists(linker_file):
         print(f"Le fichier {linker_file} n'existe pas.")
         return ""
@@ -123,3 +123,59 @@ def disconnect_from_linker(linker_file, pseudo):
         return 0
     else:
         return 1
+
+
+def get_file_for_player(player, linker_file=LINKER, directory=PERSO):
+    if not os.path.exists(linker_file):
+        print(f"Le fichier {linker_file} n'existe pas.")
+        return None
+
+    with open(linker_file, 'r') as linker:
+        lines = linker.readlines()
+
+    for line in lines:
+        # Parse the line to get the filename and pseudo
+        if ':' in line:
+            parts = line.strip().split(':')
+            filename = parts[0].strip()
+            pseudo = parts[1].strip() if len(parts) > 1 else "N/A"
+            if pseudo == player:
+                # Construct the full path to the JSON file
+                json_file_path = os.path.join(directory, filename + '.json')
+                return json_file_path
+    return None
+
+
+def get_connected_players(linker_file=LINKER):
+    if not os.path.exists(linker_file):
+        print(f"Le fichier {linker_file} n'existe pas.")
+        return []
+
+    connected_players = []
+
+    with open(linker_file, 'r') as linker:
+        lines = linker.readlines()
+
+    for line in lines:
+        # Parse the line to get the pseudo
+        if ':' in line:
+            parts = line.strip().split(':')
+            if len(parts) > 1:
+                pseudo = parts[1].strip()
+                connected_players.append(pseudo)
+
+    return connected_players
+
+def get_slug_from_pseudo(pseudo, linker_file=LINKER):
+    try:
+        with open(linker_file, 'r') as f:
+            lines = f.readlines()
+
+        for line in lines:
+            slug, player_pseudo = map(str.strip, line.split(':'))
+            if player_pseudo == pseudo:
+                return slug
+        return None
+    except FileNotFoundError:
+        print(f"Le fichier {linker_file} n'existe pas.")
+        return None
