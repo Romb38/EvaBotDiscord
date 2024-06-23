@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88df635f-5ba9-4ef9-8ce9-4c54e00e9b10" name="Changes" comment="Correctif add stats, add cmpétence, add savoir">
-      <change afterPath="$PROJECT_DIR$/services/my_checkup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roles/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/roles/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roles/incarnation.py" beforeDir="false" afterPath="$PROJECT_DIR$/roles/incarnation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roles/mj.py" beforeDir="false" afterPath="$PROJECT_DIR$/roles/mj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/constantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/var/constantes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719153753980</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Correctif add stats, add cmpétence, add savoir">
+      <option name="closed" value="true" />
+      <created>1719158653202</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1719158653202</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

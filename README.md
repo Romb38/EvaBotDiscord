@@ -9,6 +9,7 @@ Romb38
 
 Récuperez le token de votre bot discord sur le site de discord developper
 
+Pour Debian/Ubuntu:
 ```bash
 TOKEN=your_token
 git clone https://github.com/Romb38/EvaBotDiscord.git
@@ -18,6 +19,18 @@ source .venv/bin/activate
 pip install -r requirements.txt
 echo "TOKEN=$TOKEN" > .env
 python3 main.py
+```
+
+Pour Windows:
+```bash
+set TOKEN=your_token
+git clone https://github.com/Romb38/EvaBotDiscord.git
+cd EvaBotDiscord
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+echo "TOKEN=$TOKEN" > .env
+python main.py
 ```
 
 # Commands
