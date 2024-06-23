@@ -294,6 +294,6 @@ class MJ(commands.Cog):
                     await ctx.send(f"\u2705 - Fichier JSON pour '{slug}' mis à jour.")
 
             os.remove(LINKER)
-            await ctx.send(f"\u2705 - Tous les joueurs ont été déconnectés.")
+            await ctx.send(f"\u2705 - Tous les joueurs ont été déconnectés. Attention, les statistiques des incarnation n'ont pas été ré-initialisée")
 async def setup(bot):
     await bot.add_cog(MJ(bot))
