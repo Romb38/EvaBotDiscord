@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import asyncio
-from constantes import *
+from var.constantes import *
 from pretty_help import PrettyHelp
 
 # Définir les intents
@@ -13,7 +13,7 @@ intents.message_content = True  # Pour accéder au contenu des messages
 bot = commands.Bot(command_prefix='!', intents=intents, help_command=PrettyHelp())
 
 async def load_extensions():
-    initial_extensions = ['mj', 'incarnation']
+    initial_extensions = ['roles.mj', 'roles.incarnation']
     for extension in initial_extensions:
         await bot.load_extension(extension)
 

@@ -1,5 +1,8 @@
 import json
-from constantes import *
+
+import discord
+
+from var.constantes import *
 
 
 def update_linker_file(slug, player_pseudo, directory=PERSO, linker_file=LINKER, ):
@@ -58,7 +61,7 @@ def create_or_update_linker_file(directory=PERSO, linker_file=LINKER):
     else:
         # If linker.txt does not exist, all entries are new
         existing_entries = []
-        new_entries = [file + ':' for file in files_without_extension]
+        new_entries = [file for file in files_without_extension]
 
     # Write (or append) to linker.txt
     with open(linker_file, 'a') as file:
@@ -66,41 +69,34 @@ def create_or_update_linker_file(directory=PERSO, linker_file=LINKER):
             file.write(entry + '\n')
 
 
-def list_linker_file(directory=PERSO, linker_file=LINKER):
+# Votre fonction pour lister les fichiers linker et créer un embed
+async def list_linker_file(ctx, directory=PERSO, linker_file=LINKER):
     if not os.path.exists(linker_file):
         print(f"Le fichier {linker_file} n'existe pas.")
-        return ""
+        return
 
-    results = ["SLUG\tNOM\tPRENOM\tJOUEUR"]
+    embed = discord.Embed(title="Liste des personnages liés", color=0x00ff00)
 
     with open(linker_file, 'r') as linker:
         lines = linker.readlines()
 
     for line in lines:
-        # Parse the line to get the filename and pseudo
         if ':' in line:
             parts = line.strip().split(':')
             filename = parts[0].strip()
             pseudo = parts[1].strip() if len(parts) > 1 and parts[1] != "" else "N/A"
-
-            # Construct the full path to the JSON file
             json_file_path = os.path.join(directory, filename + '.json')
 
             if os.path.exists(json_file_path):
-                # Read the JSON file
-                with open(json_file_path, 'r') as json_file:
-                    data = json.load(json_file)
-                    nom = data.get('nom', 'N/A')
-                    prenom = data.get('prenom', 'N/A')
-                    results.append(f"{filename}\t{nom}\t{prenom}\t{pseudo}")
+                embed.add_field(name="SLUG", value=filename, inline=True)
+                embed.add_field(name="JOUEUR", value=pseudo, inline=True)
+                # Ajoute une ligne vide pour séparer les entrées
             else:
                 print(f"Le fichier JSON {json_file_path} n'existe pas.")
         else:
             print(f"Format de ligne invalide: {line}")
 
-    # Combine results into a single string
-    result_string = "\n".join(results)
-    return result_string
+    return embed
 
 
 def disconnect_from_linker(pseudo, linker_file=LINKER):

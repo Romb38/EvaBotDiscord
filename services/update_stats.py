@@ -1,5 +1,5 @@
 import json
-from constantes import *
+from var.constantes import *
 
 
 def add_stats(file, stats, count):

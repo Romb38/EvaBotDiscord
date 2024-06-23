@@ -109,5 +109,3 @@ async def update_character_stats_message(bot, json_file_path):
     data['admin']['last-msg'] = stats_message.id
     with open(json_file_path, 'w') as json_file:
         json.dump(data, json_file, indent=4)
-
-    print(f"Les statistiques ont été envoyées et l'ID du dernier message a été mis à jour.")
