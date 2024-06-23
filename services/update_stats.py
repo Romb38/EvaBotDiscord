@@ -6,33 +6,30 @@ def add_stats(file, stats, count):
     with open(file, 'r') as json_file:
         data = json.load(json_file)
 
+
     # Ajouter la valeur count au champ stats
     if stats in data["stats"]["combat"]:
         #Stats en combats
         point = data.get("combat_left_to_attribute")
         if point < count:
-            return f"Il ne vous reste que {point} points de statistiques à distribuer. Rien à été modifié"
+            return f"\u274C - Il ne vous reste que {point} points de statistiques à distribuer. Rien à été modifié"
         data["stats"]["combat"][stats] += count
         data["combat_left_to_attribute"] -= count
     elif stats in data["stats"]["hors_combat"]:
         # Stats hors combat
         point = data.get("hors_left_to_attribute")
         if point < count:
-            return f"Il ne vous reste que {point} points de statistiques à distribuer. Rien à été modifié"
+            return f"\u274C - Il ne vous reste que {point} points de statistiques à distribuer. Rien à été modifié"
         data["stats"]["hors_combat"][stats] += count
         data["hors_left_to_attribute"] -= count
     else:
-
-        return "Cette statistique n'existe pas"
-
-    # Retirer count du champ "left_to_attribute"
-    data["left_to_attribute"] -= count
+        return "\u274C - Cette statistique n'existe pas"
 
     # Écrire les modifications dans le fichier
     with open(file, 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
-    return "Points attribués avec succès"
+    return "\u2705 - Points attribués avec succès"
 
 
 def add_insanite(file):

@@ -184,7 +184,6 @@ class MJ(commands.Cog):
 
     @commands.command(name="init", help="Initialise les rôles et salons pour les personnages.")
     @commands.has_permissions(administrator=True)
-
     async def init(self, ctx):
         async with semaphore:
             guild = ctx.guild

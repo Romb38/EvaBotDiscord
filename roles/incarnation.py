@@ -132,7 +132,7 @@ class Incarnation(commands.Cog):
             else:
                 out = us.add_stats(file, stats, count)
                 await fs.update_character_stats_message(ctx.bot, file)
-                await ctx.send("\u2705 - " + out)
+                await ctx.send(out)
 
 
 async def setup(bot):

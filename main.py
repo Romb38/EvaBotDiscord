@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 from var.constantes import *
+from pretty_help import PrettyHelp
 
 # Définir les intents
 intents = discord.Intents.all()
@@ -9,7 +10,7 @@ intents.members = True
 intents.message_content = True  # Pour accéder au contenu des messages
 
 # Préfixe pour les commandes du bot
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='!', intents=intents, help_command=PrettyHelp())
 
 
 async def load_extensions():
