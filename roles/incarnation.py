@@ -6,23 +6,42 @@ from errors.ErrorNotConnected import ErrorNotConnected
 from services import tools as t, update_stats as us, format_stats as fs, roles as r
 from var.constantes import *
 
+
 class Incarnation(commands.Cog):
     """Catégorie de commandes pour les incarnations."""
-
 
     def __init__(self, bot):
         self.bot = bot
 
-
-    # Fonction de vérification (checkup)
     @staticmethod
     def checkup():
         async def predicate(ctx):
             if not os.path.exists(LINKER):
-                await ctx.send("\u274C - La partie n'a pas encore commencée. Contactez l'administrateur pour commencer la partie")
                 raise commands.CheckFailure(f"Le fichier {LINKER} n'existe pas.")
             return True
+
         return commands.check(predicate)
+    @staticmethod
+    def isNotConnected():
+        async def predicate(ctx):
+            file = t.get_file_for_player(ctx.author.name)
+            if file:
+                return False
+            return True
+
+        return commands.check(predicate)
+
+    @staticmethod
+    def isConnected():
+        async def predicate(ctx):
+            file = t.get_file_for_player(ctx.author.name)
+            if not file:
+                return False
+            return True
+
+        return commands.check(predicate)
+
+
 
     @commands.command(name='d20', help="Lance un dé à 20 faces")
     async def d20(self, ctx):
@@ -50,6 +69,7 @@ class Incarnation(commands.Cog):
 
     @commands.command(name='connect', help='Lie un joueur à une incarnation en utilisant un slug.')
     @checkup()
+    @isNotConnected()
     async def connect(self, ctx,
                       slug: str = commands.parameter(description=": Slug de l'incarnation (généralement nom_prenom)")):
         async with semaphore:
@@ -75,11 +95,12 @@ class Incarnation(commands.Cog):
             embed = await t.list_linker_file(ctx)
             if not embed:
                 await ctx.send("\u274C - Une erreur est survenue")
-            else :
+            else:
                 await ctx.send(embed=await t.list_linker_file(ctx))
 
     @commands.command(name="disconnect", help="Dé-lie un joueur et son incarnation")
     @checkup()
+    @isConnected()
     async def disconnect(self, ctx):
         async with semaphore:
             t.create_or_update_linker_file()
@@ -96,6 +117,7 @@ class Incarnation(commands.Cog):
 
     @commands.command(name="add", help="Ajoute une valeur aux statistiques")
     @checkup()
+    @isConnected()
     async def add(self, ctx, count: int = commands.parameter(description=": Valeur de l'augmentation"),
                   stats: str = commands.parameter(description=": Nom de la stat à améliorer")):
         async with semaphore:

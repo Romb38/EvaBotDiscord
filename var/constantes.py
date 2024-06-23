@@ -13,3 +13,5 @@ LVL_UP_COMBAT_STAT=1
 LVL_UP_HORS_COMBAT_STAT=2
 
 semaphore = asyncio.Semaphore(1)
+
+isHelp=False
